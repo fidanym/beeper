@@ -1,5 +1,5 @@
 #Beeper
-###A Twitter-like social network learning project
+###A Twitter-like social network learning project made using Vue.js
 ***
 
 To run the project, it is necessary to run the following commands:
