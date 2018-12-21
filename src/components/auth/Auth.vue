@@ -2,9 +2,11 @@
     <div id="auth">
         <div class="container">
             <div class="row">
-                <div class="coll-md-4 col-md-offset-4 authForm">
+                <div class="col-md-6 offset-md-3 authForm">
                     <h2 class="text-center">Beeper</h2>
-                    <router-view/>
+                    <transition name="fade">
+                        <router-view/>
+                    </transition>
                 </div>
             </div>
         </div>
@@ -18,5 +20,16 @@
 </script>
 
 <style scoped>
-
+    #auth {
+        height: 100%;
+        display: flex;
+        align-items: center;
+    }
+    .authForm {
+        margin-top: 50px;
+        background: #fff;
+        padding-bottom: 10px;
+        padding-top: 10px;
+        border-radius: 10px;
+    }
 </style>
