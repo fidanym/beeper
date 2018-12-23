@@ -17,7 +17,24 @@ Vue.config.productionTip = false
 Vue.use(VueResource)
 Vue.use(Notifications)
 
-alertify.defaults.notifier.position = 'top-right';
+Vue.http.interceptors.push(function(request, next) {
+  let self = this;
+  if (request.url[0] === '/') {
+    request.url = process.env.API + request.url;
+  }
+  next(function(response) {
+    if (response.status == 422) {
+      response.body.errors.forEach(function (e) {
+        self.$notify({
+          group: 'foo',
+          type: 'error',
+          title: 'Error',
+          text: e
+        });
+      })
+    }
+  });
+});
 
 /* eslint-disable no-new */
 new Vue({

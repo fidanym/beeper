@@ -30,29 +30,17 @@
     },
     methods: {
       register: function () {
-        let self = this;
-        this.$http.post("http://localhost:9090/users", this.user)
-              .then(function (res){
-                self.$notify({
-                  group: 'foo',
-                  type: 'success',
-                  title: 'Success!',
-                  text: 'You can now login with your username and password'
-                });
-                this.$router.push('/auth/login');
-              })
-              .catch(function (res) {
-                if (res.status == 422) {
-                  res.body.errors.forEach(function (e) {
-                    self.$notify({
-                      group: 'foo',
-                      type: 'error',
-                      title: 'Error',
-                      text: e
-                    });
-                  })
-                }
-              })
+        this.$http.post("/users", this.user)
+          .then(function (res){
+            self.$notify({
+              group: 'foo',
+              type: 'success',
+              title: 'Success!',
+              text: 'You can now login with your username and password'
+            });
+            this.$router.push('/auth/login');
+          })
+
       }
     }
   }
