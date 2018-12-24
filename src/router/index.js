@@ -3,11 +3,26 @@ import Router from 'vue-router'
 import Auth from '../components/auth/Auth'
 import Login from '../components/auth/Login'
 import Register from '../components/auth/Register'
+import Newsfeed from '../components/dash/Newsfeed'
+import Dash from '../components/dash/Dash'
 
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [
+    {
+      path: '/',
+      component: Dash,
+      redirect: '/newsfeed',
+      children: [
+        {
+          path: 'newsfeed',
+          component: Newsfeed,
+          meta: { requiresAuth: true }
+        }
+      ]
+    },
     {
       path: '/auth',
       name: 'Auth',
@@ -17,12 +32,14 @@ export default new Router({
         {
           path: 'login',
           name: 'Login',
-          component: Login
+          component: Login,
+          meta: { requiresGuest: true }
         },
         {
           path: 'register',
           name: 'Register',
-          component: Register
+          component: Register,
+          meta: { requiresGuest: true }
         }
         ]
     }
