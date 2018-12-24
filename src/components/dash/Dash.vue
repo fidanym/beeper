@@ -3,11 +3,11 @@
         <div id="dashWrap">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-3 col-md-offset-1 col-sm-5">
+                    <div class="col-md-3 col-md-offset-1 col-sm-5 align-self-start">
                         <sidebar></sidebar>
                     </div>
 
-                    <div class="col-md-7 col-sm-7 mainView">
+                    <div class="col-md-7 col-sm-7 mainView align-self-start">
                         <transition name="fade">
                             <router-view></router-view>
                         </transition>
