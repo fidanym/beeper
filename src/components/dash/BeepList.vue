@@ -23,6 +23,7 @@
             this.getBeeps(1);
 
             window.addEventListener('scroll', this.handleScroll);
+            this.$root.$on('newBeep', this.handleNewBeep);
         },
         destroyed: function () {
             window.removeEventListener('scroll', this.handleScroll);
@@ -57,11 +58,18 @@
                         this.beepsLoading = false;
                     })
             },
+
             handleScroll: function () {
                 if ((document.body.scrollHeight - window.innerHeight - document.documentElement.scrollTop) == 0) {
                     if (this.page.current < this.page.last) {
                         this.getBeeps(this.page.current + 1);
                     }
+                }
+            },
+
+            handleNewBeep: function (beep) {
+                if (!this.$route.params.username || this.$route.params.username == beep.author.username) {
+                    this.beeps.unshift(beep);
                 }
             }
         }
