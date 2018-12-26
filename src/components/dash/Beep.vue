@@ -1,15 +1,17 @@
 <template>
     <div class="container beep">
         <div class="row">
-            <div class="col-sm-2 text-center">
+            <div class="col-sm-2 text-center" v-show="showUserInfo">
                 <router-link :to="'/profile/'+beep.author.username">
                     <img :src="beep.author.avatar" class="rounded-circle no-margin">
                 </router-link>
             </div>
 
             <div class="col-sm-10">
-                <router-link :to="'/profile/'+beep.author.username">@{{beep.author.username}}</router-link>
-                <small class="text-muted">said:<br><br></small>
+                <div v-show="showUserInfo">
+                    <router-link :to="'/profile/'+beep.author.username">@{{beep.author.username}}</router-link>
+                    <small class="text-muted">said:<br><br></small>
+                </div>
                 <p :class="{
                     small: beep.text.length >= 150,
                     medium: beep.text.length <150 && beep.text.length > 50,
@@ -36,9 +38,21 @@
     import moment from 'moment'
     export default {
         name: 'Beep',
-        props: {beep: {}},
+        props: {
+            beep: {},
+            showUserInfo: {type: Boolean, default: true}
+        },
         methods: {
             likeBeep: function () {
+                if (!this.$auth.loggedIn()) {
+                    this.$notify({
+                        group: 'foo',
+                        type: 'error',
+                        title: 'Log in!',
+                        text: 'You need to log in to like beeps'
+                    });
+                    return;
+                }
                 this.$http.patch('/beeps/' + this.beep.id + '/like')
                     .then(function (res) {
                         if (this.beep.liked) {

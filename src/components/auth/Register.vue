@@ -32,7 +32,7 @@
       register: function () {
         this.$http.post("/users", this.user)
           .then(function (res){
-            self.$notify({
+            this.$notify({
               group: 'foo',
               type: 'success',
               title: 'Success!',
