@@ -3,7 +3,7 @@
         <h4 class="text-center m-b-20">Login</h4>
 
         <input type="text" v-model="user.username" class="form-control m-b-15" placeholder="Username">
-        <input type="password" v-model="user.password" class="form-control" placeholder="Password">
+        <input type="password" v-model="user.password" v-on:keyup.enter="login"  class="form-control" placeholder="Password">
 
         <hr>
 

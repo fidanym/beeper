@@ -4,7 +4,7 @@
 
         <input type="email" v-model="user.email" class="form-control m-b-15" placeholder="Email address">
         <input type="text" v-model="user.username" class="form-control m-b-15" placeholder="Username">
-        <input type="password" v-model="user.password" class="form-control" placeholder="Password">
+        <input type="password" v-model="user.password" v-on:keyup.enter="register" class="form-control" placeholder="Password">
 
         <hr>
 
