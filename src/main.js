@@ -8,6 +8,7 @@ import router from './router'
 import VueResource from 'vue-resource'
 import Notifications from 'vue-notification'
 import Auth from './plugins/Auth'
+import store from "./store";
 
 /*
 or for SSR:
@@ -61,6 +62,7 @@ router.beforeEach(function (to, from, next) {
 new Vue({
   el: '#app',
   router,
+  store: store,
   components: { App },
   template: '<App/>'
 })
